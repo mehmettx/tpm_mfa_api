@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="listGroupMembers" path="/api/v1/GroupOperations/listGroupMembers" id="f75e608d-8c0f-44b2-a70f-5f0441afece5">
+  <con:settings id="217b6b03-ac69-409d-a5a8-b46203519734">
+    <con:setting id="f75e608d-8c0f-44b2-a70f-5f0441afece5fileName">listGroupMembers</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="listGroupMembers" id="de3f5dbc-e454-4a14-b941-d1208dcc1b18" method="GET">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>groupName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="listGroupMembers" id="43ddcdbd-aae7-4fa0-a4b9-3462cdbc5594" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters>
+        <con:entry key="groupId" value=""/>
+      </con:parameters>
+      <con:parameterOrder>
+        <con:entry>oktaUrl</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+        <con:entry>groupId</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

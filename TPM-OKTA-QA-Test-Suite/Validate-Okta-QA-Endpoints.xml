@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="df122d0a-767c-4a94-a38f-8ae868991b55" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Validate Okta QA Endpoints" searchProperties="true" timeout="0">
+  <con:settings id="47148c9c-1603-40be-bc37-57c11fd69ec6">
+    <con:setting id="IncludeOverview">true</con:setting>
+    <con:setting id="IncludeResults">true</con:setting>
+    <con:setting id="FlowLayout">false</con:setting>
+    <con:setting id="ErrorDetails">true</con:setting>
+    <con:setting id="IncludeCoverage">true</con:setting>
+    <con:setting id="GeneratableAllureReport@Folder">C:\Users\ec9101r\OneDrive - McKesson Corporation\Desktop\Sprints\Sprint 17</con:setting>
+    <con:setting id="df122d0a-767c-4a94-a38f-8ae868991b55fileName">Validate-Okta-QA-Endpoints</con:setting>
+  </con:settings>
+  <con:testStep type="groovy" name="Groovy Script" id="e9d55798-02d4-465d-b5de-051f9c27d927">
+    <con:settings/>
+    <con:config>
+      <script>import java.util.Random
+
+// Generate a random alphanumeric string
+String generateRandomString(int length) {
+    def characters = ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890').toCharArray()
+    def random = new Random()
+    def stringBuilder = new StringBuilder()
+    
+    for (int i = 0; i &lt; length; i++) {
+        stringBuilder.append(characters[random.nextInt(characters.length)])
+    }
+    
+    return stringBuilder.toString()
+}
+
+// Generate a random email address
+String generateRandomEmail() {
+    def randomString = generateRandomString(10)
+    return randomString + '@example.com'
+}
+
+// Assign the generated email to a property
+testRunner.testCase.setPropertyValue('generatedEmail', generateRandomEmail())
+   log.info("Coninue for generated email: " + generateRandomEmail());</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Update Groups" id="3d935c82-6e7f-41b0-9c1c-9ee7e4170b4c" disabled="true">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/GroupOperations/updateGroup" methodName="updateGroup" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Update Groups" id="1128a324-c762-41d4-9e69-d2fe6139359f" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request>{
+  "id": "${#TestCase#groupId}",
+  "created": "2024-05-02T21:16:45.821Z",
+  "lastUpdated": "2024-05-02T21:16:45.821Z",
+  "lastMembershipUpdated": "2024-05-02T21:16:45.821Z",
+  "profile": {
+    "name": "NPE-TPM-MFA-Users",
+    "description": "Kevin testing2"
+  }
+}</con:request>
+        <con:originalUri>https://10.106.33.35/api/v1/GroupOperations/updateGroup</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="89dd5d5b-803b-4620-a2d1-4f601d4924bf" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="d39863f3-4a18-49df-8d1c-c2f5a393f260" name="Response SLA">
+          <con:configuration>
+            <SLA>1000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search groups" id="a30e44e3-ba92-4698-a7da-d6f364c0c0ec">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/GroupOperations/searchGroup" methodName="searchGroup" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search groups" id="18ec25b2-754a-4b85-9b31-a6502b4ea803" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.35/api/v1/GroupOperations/searchGroup</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="60e070ad-ad1c-4706-993e-b08cdd77426a" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="318d1adf-e55e-40eb-a848-c15c0e9514cd" name="Response SLA">
+          <con:configuration>
+            <SLA>3000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="groupName" value="${#TestCase#groupName}"/>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="oktaUrl" value="${#TestSuite#Okta Url}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>groupName</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="List group members" id="dc4c73fa-1757-4f29-966a-6b6b0652a6a2">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/GroupOperations/listGroupMembers" methodName="listGroupMembers" xsi:type="con:RestRequestStep">
+      <con:restRequest name="List group members" id="43ddcdbd-aae7-4fa0-a4b9-3462cdbc5594" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.35/api/v1/GroupOperations/listGroupMembers</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="9db3042b-8a24-47f8-b867-e2a1007ba3e7" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="304d2276-ab97-4855-a920-a2a0b1086733" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="groupName" value="${#TestCase#groupName}"/>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>groupName</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Create a user in a group" id="16b9ce35-0e03-45a9-8936-69ecfde7a0da">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/createUserInGroup" methodName="createUserInGroup" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Create a user in a group" id="795fca2e-5f1c-4801-82bb-b467560addfb" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request>{
+    "firstName": "Dave",
+    "lastName": "Simpson",
+    "login": "${#TestCase#generatedEmail}",
+    "email": "${#TestCase#generatedEmail}"
+  }</con:request>
+        <con:originalUri>https://10.106.33.35/api/v1/UserOperations/createUserInGroup</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="21eb5762-e90e-42b2-b643-6981d793619b" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>201</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="611b4b74-7a59-4035-acac-4eac8f13630c" name="Response SLA">
+          <con:configuration>
+            <SLA>3000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="groupId" value="${#TestCase#groupId}"/>
+          <con:entry key="oktaUrl" value="${#TestSuite#Okta Url}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>groupId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search user using wild cards" id="36b8832c-9bc1-4d80-b16f-3d5d41bf6e99">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/SearchUserWithWildCardUri" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search user using wild cards" id="71c3729a-6ea3-423b-975a-8cc33d8f66dd" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/SearchUserWithWildCardUri</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="f8c8e5fd-e897-4d24-b465-a1a0676dbc02" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="8b3214a3-a21a-40c6-94fd-7924d1b55f65" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="searchStr" value="${Create a user in a group#Response#$['profile']['login']}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>searchStr</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="delay" name="Delay 1" id="2871e54e-82ce-480d-829c-734377607958">
+    <con:settings/>
+    <con:config>
+      <delay>3000</delay>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search user by first name" id="0c8d53a3-3843-4b30-9a79-a7f8b2379d01">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserByFirstName" methodName="Method 2" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search user by first name" id="e3861b41-e503-4d08-9bea-93b1fb42b5dc" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserByFirstName</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="c266dced-ae15-4cb0-bdad-d60c152b2fd3" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="473e7eb4-3060-4967-96c5-a7d7bda73cff" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="firstName" value="${Create a user in a group#Response#$['profile']['firstName']}"/>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>firstName</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search user by last name" id="842471bb-6847-48bf-8580-abb4013fc790">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserByLastName" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search user by last name" id="96cf5438-2907-4362-bec7-b79954bcaf4e" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserByLastName</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="d023108e-dc89-41d6-a51a-9864d001cdff" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="f75adb6d-f821-4518-a903-3a48f99cb1de" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="lastName" value="${Create a user in a group#Response#$['profile']['lastName']}"/>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>lastName</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search user by login info" id="6f3c60e6-f79c-431c-8351-bdd2f3a42576">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserByLogin" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search user by login info" id="e5aa1626-0ed2-4ebd-a0db-654b85616657" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserByLogin</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="b3a00a23-ef24-49eb-ab7e-7cf3128e403f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="df597101-b6d9-423b-9de4-2b2e6a6ebe6e" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="login" value="${Create a user in a group#Response#$['profile']['login']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>login</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search user by email address" id="16730764-6ccc-4e66-b9f1-8dc735f5cedc">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserByEmail" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search user by email address" id="db5a58c1-893a-43a6-970a-cbed2fecd73c" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserByEmail</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="c847dcd1-d20c-4762-939d-b3948086271c" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="e74c170d-f6bb-4a5f-8fe2-49eadb839223" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="email" value="${Create a user in a group#Response#$['profile']['email']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>email</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Search user by ID" id="95db1dff-ade3-444d-b947-9eb86b8f8f64">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserById" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Search user by ID" id="49c09bf9-da82-417e-83e5-02c4911d994b" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserById</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="a4e17778-d026-410f-a54e-d677a1b0bf7f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="f6db5a0b-82eb-4e4e-a6ae-a20cf050e1a1" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Add user to a group" id="1b820c0f-0d93-46a6-8867-4b2624d32266">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/GroupOperations/addUserToGroup" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Add user to a group" id="324915e4-4366-428b-be07-bfa00b4fa282" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/GroupOperations/addUserToGroup</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="ec96d160-3cdd-4781-b095-87855147e6e0" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="c5b6bfa3-8216-437d-b3c4-f954f1167bf1" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="groupName" value="${#TestCase#groupName}"/>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>groupName</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Update user" id="6cb3bb4a-c074-43c1-b3d7-73fb5384382c">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/updateUser" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Update user" id="79fd8492-6ac3-4428-918e-8f0ff203836d" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request>{
+  "profile": {
+    "firstName": "Dave1",
+    "lastName": "Simpson1",
+    "login": "1${Search user by ID#Response#$[0]['profile']['login']}",
+    "email": "1${Search user by ID#Response#$[0]['profile']['login']}"
+  }
+}</con:request>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/updateUser</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="ae8cb771-c75e-4553-b974-ecf46e92bddb" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="bb147fd2-72a2-4ba0-adad-420f4696d487" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Search user using wild cards#Response#$[0]['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="delay" name="Delay 2" id="b5ddf535-6483-4f87-9b67-a3fc9a3acf1a">
+    <con:settings/>
+    <con:config>
+      <delay>2000</delay>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Validate user is updated" id="532cb29c-9a15-4a96-9cee-daafeca324e5">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserById" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Validate user is updated" id="49c09bf9-da82-417e-83e5-02c4911d994b" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserById</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="a4e17778-d026-410f-a54e-d677a1b0bf7f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="f6db5a0b-82eb-4e4e-a6ae-a20cf050e1a1" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Search user using wild cards#Response#$[0]['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Activate user" id="25ef8f97-5c28-42d6-9ca4-4c7e77778f2e">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/activateUser" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Activate user" id="dda4367d-53ae-40f8-84a2-e6ba27d9a21e" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/activateUser</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="f0c8843f-05ee-4a84-859b-ba3186ac9a5f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="43568ccf-537e-4d1c-ad49-50156d836d86" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Validate user is updated#Response#$[0]['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="delay" name="Delay 3" id="134fe22f-bd36-4e1a-b9e2-e6e22777669d">
+    <con:settings/>
+    <con:config>
+      <delay>3000</delay>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Check user status" id="ed86f650-c7d9-4a2e-8853-3635e00700c3">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserById" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Check user status" id="49c09bf9-da82-417e-83e5-02c4911d994b" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserById</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="a4e17778-d026-410f-a54e-d677a1b0bf7f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="f6db5a0b-82eb-4e4e-a6ae-a20cf050e1a1" name="Response SLA">
+          <con:configuration>
+            <SLA>5000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="DataAndMetadataAssertion" id="154e2354-2873-45c1-894c-37c003c5583c" name="Smart Assertion">
+          <con:configuration xsi:type="con:DataAndMetadataAssertion">
+            <con:mode>Received Data</con:mode>
+            <con:elements>
+              <con:path>$[0]['id']</con:path>
+              <con:element>id</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Create a user in a group#Response#$['id']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['status']</con:path>
+              <con:element>status</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>PROVISIONED</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['created']</con:path>
+              <con:element>created</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T18:23:38Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['activated']</con:path>
+              <con:element>activated</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T18:23:45Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['statusChanged']</con:path>
+              <con:element>statusChanged</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T18:23:45Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['lastLogin']</con:path>
+              <con:element>lastLogin</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>null</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>4</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['lastUpdated']</con:path>
+              <con:element>lastUpdated</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T18:23:45Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['passwordChanged']</con:path>
+              <con:element>passwordChanged</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>null</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>4</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['firstName']</con:path>
+              <con:element>firstName</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>Dave1</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['lastName']</con:path>
+              <con:element>lastName</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>Simpson1</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['login']</con:path>
+              <con:element>login</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['login']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['email']</con:path>
+              <con:element>email</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['email']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:originalMessage>[{"id":"00uem2ahijgXGGzVe1d7","status":"PROVISIONED","created":"2024-05-13T18:23:38Z","activated":"2024-05-13T18:23:45Z","statusChanged":"2024-05-13T18:23:45Z","lastLogin":null,"lastUpdated":"2024-05-13T18:23:45Z","passwordChanged":null,"profile":{"firstName":"Dave1","lastName":"Simpson1","login":"1ebQ2mL7ZvT@example.com","email":"1ebQ2mL7ZvT@example.com"}}]</con:originalMessage>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Reactivate user - should be from UI" id="575399d7-8b1b-47d0-9050-39e094a529f9" disabled="true">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/reActivate" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Reactivate user - should be from UI" id="d2ccfe06-d017-4e14-ba12-0ae037e35a5d" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:assertion type="Valid HTTP Status Codes" id="4b032c08-a680-486b-b587-bc02fa75c1d3" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="b71545dc-539e-4222-9a74-d7576fe9078a" name="Response SLA">
+          <con:configuration>
+            <SLA>1000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaTenantName" value=""/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Suspend a user" id="62fb11dc-0070-4bf8-8317-3454abc802df">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/suspendUser" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Suspend a user" id="ad5a43d2-5480-46d1-9512-7d7cdc8bd42b" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/suspendUser</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="69f7829d-fb25-44e3-9308-be08430cbf16" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="57edd493-4c68-4c12-977b-78037f1f3ba4" name="Response SLA">
+          <con:configuration>
+            <SLA>1000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="delay" name="Delay 4" id="ba634613-431a-42d6-a3a0-9d08f4b5595e">
+    <con:settings/>
+    <con:config>
+      <delay>2000</delay>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Validate user is suspended" id="bbd775e8-f203-40c1-93c8-567fce258df5">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserById" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Validate user is suspended" id="49c09bf9-da82-417e-83e5-02c4911d994b" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserById</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="a4e17778-d026-410f-a54e-d677a1b0bf7f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="f6db5a0b-82eb-4e4e-a6ae-a20cf050e1a1" name="Response SLA">
+          <con:configuration>
+            <SLA>5000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="DataAndMetadataAssertion" id="bd9af880-e2a9-418a-8072-8751919d2f2b" name="Smart Assertion">
+          <con:configuration xsi:type="con:DataAndMetadataAssertion">
+            <con:mode>Received Data</con:mode>
+            <con:elements>
+              <con:path>$[0]['id']</con:path>
+              <con:element>id</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Create a user in a group#Response#$['id']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['status']</con:path>
+              <con:element>status</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is suspended#Response#$[0]['status']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['created']</con:path>
+              <con:element>created</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:45:40Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['activated']</con:path>
+              <con:element>activated</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:45:48Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['statusChanged']</con:path>
+              <con:element>statusChanged</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:45:51Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['lastLogin']</con:path>
+              <con:element>lastLogin</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>null</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>4</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['lastUpdated']</con:path>
+              <con:element>lastUpdated</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:45:51Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['passwordChanged']</con:path>
+              <con:element>passwordChanged</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>null</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>4</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['firstName']</con:path>
+              <con:element>firstName</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['firstName']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['lastName']</con:path>
+              <con:element>lastName</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['lastName']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['login']</con:path>
+              <con:element>login</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['login']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['email']</con:path>
+              <con:element>email</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['email']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:originalMessage>[{"id":"00uemdhs5fwoUnJjQ1d7","status":"SUSPENDED","created":"2024-05-13T22:45:40Z","activated":"2024-05-13T22:45:48Z","statusChanged":"2024-05-13T22:45:51Z","lastLogin":null,"lastUpdated":"2024-05-13T22:45:51Z","passwordChanged":null,"profile":{"firstName":"Dave1","lastName":"Simpson1","login":"1q32WgLg2dS@example.com","email":"1q32WgLg2dS@example.com"}}]</con:originalMessage>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Unsuspend a user" id="faa399ab-bd1a-4f2b-940f-bac27aec428f">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/unsuspendUser" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Unsuspend a user" id="5e806841-cfae-4047-a5c1-e358fb543f06" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/unsuspendUser</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="951483a3-221a-441d-9905-de23bba00569" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="d68fadd0-f47b-497d-9f22-702df0445af6" name="Response SLA">
+          <con:configuration>
+            <SLA>1000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="delay" name="Delay 5" id="44823bd4-f179-4129-bf62-5bdc35aa1d91">
+    <con:settings/>
+    <con:config>
+      <delay>2000</delay>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Validate user is unsuspended" id="336733e8-1c01-4db3-a50d-2ff230cfe9b2">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/UserOperations/searchUserById" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Validate user is unsuspended" id="49c09bf9-da82-417e-83e5-02c4911d994b" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/UserOperations/searchUserById</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="a4e17778-d026-410f-a54e-d677a1b0bf7f" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="f6db5a0b-82eb-4e4e-a6ae-a20cf050e1a1" name="Response SLA">
+          <con:configuration>
+            <SLA>5000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="DataAndMetadataAssertion" id="c643edec-4545-4fac-9641-6c092b6d97a7" name="Smart Assertion">
+          <con:configuration xsi:type="con:DataAndMetadataAssertion">
+            <con:mode>Received Data</con:mode>
+            <con:elements>
+              <con:path>$[0]['id']</con:path>
+              <con:element>id</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['id']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['status']</con:path>
+              <con:element>status</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is unsuspended#Response#$[0]['status']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['created']</con:path>
+              <con:element>created</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:53:49Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['activated']</con:path>
+              <con:element>activated</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:53:58Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['statusChanged']</con:path>
+              <con:element>statusChanged</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:54:04Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['lastLogin']</con:path>
+              <con:element>lastLogin</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>null</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>4</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['lastUpdated']</con:path>
+              <con:element>lastUpdated</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>2024-05-13T22:54:04Z</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['passwordChanged']</con:path>
+              <con:element>passwordChanged</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>false</con:enabled>
+              <con:expectedValue>null</con:expectedValue>
+              <con:caseSensitive>false</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>4</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['firstName']</con:path>
+              <con:element>firstName</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['firstName']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['lastName']</con:path>
+              <con:element>lastName</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['lastName']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['login']</con:path>
+              <con:element>login</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['login']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:elements>
+              <con:path>$[0]['profile']['email']</con:path>
+              <con:element>email</con:element>
+              <con:operatorId>1</con:operatorId>
+              <con:enabled>true</con:enabled>
+              <con:expectedValue>${Validate user is updated#Response#$[0]['profile']['email']}</con:expectedValue>
+              <con:caseSensitive>true</con:caseSensitive>
+              <con:numberType>false</con:numberType>
+              <con:expectedDataType>1</con:expectedDataType>
+            </con:elements>
+            <con:originalMessage>[{"id":"00uemdtbc2IEtnMOd1d7","status":"PROVISIONED","created":"2024-05-13T22:53:49Z","activated":"2024-05-13T22:53:58Z","statusChanged":"2024-05-13T22:54:04Z","lastLogin":null,"lastUpdated":"2024-05-13T22:54:04Z","passwordChanged":null,"profile":{"firstName":"Dave1","lastName":"Simpson1","login":"1gxb5bj75zW@example.com","email":"1gxb5bj75zW@example.com"}}]</con:originalMessage>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="${#TestSuite#oktaTenantName}"/>
+          <con:entry key="userId" value="${Create a user in a group#Response#$['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Remove user from group" id="5dcf6119-f9c4-47b5-a62f-df736f743521">
+    <con:settings/>
+    <con:config service="TPM-OKTA-QA" resourcePath="/api/v1/GroupOperations/removeUserFromGroup" methodName="Method 1" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Remove user from group" id="ef425e12-8b1e-41a6-807b-cdb3d9a20839" mediaType="application/json" postQueryString="false">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:originalUri>https://10.106.33.36/api/v1/GroupOperations/removeUserFromGroup</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="e421346e-d3b8-42f0-aa49-a41a53a71dd8" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="efe5476c-8322-47cc-be99-4b3cef88c2ee" name="Response SLA">
+          <con:configuration>
+            <SLA>2000</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="groupName" value="${#TestCase#groupName}"/>
+          <con:entry key="oktaApiKey" value="${#TestSuite#API Key}"/>
+          <con:entry key="oktaTenantName" value="preview"/>
+          <con:entry key="userId" value="${Validate user is updated#Response#$[0]['id']}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>groupName</con:entry>
+          <con:entry>userId</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:properties>
+    <con:property>
+      <con:name>generatedEmail</con:name>
+      <con:value>LuFYSksE99@example.com</con:value>
+    </con:property>
+    <con:property>
+      <con:name>groupId</con:name>
+      <con:value>00geae14e7Zu2xfAv1d7</con:value>
+    </con:property>
+    <con:property>
+      <con:name>searchUserByEmail</con:name>
+      <con:value>email eq "gunduztx@gmail.com"</con:value>
+    </con:property>
+    <con:property>
+      <con:name>groupName</con:name>
+      <con:value>NPE-TPM-MFA-Users</con:value>
+    </con:property>
+    <con:property>
+      <con:name>wildCardByName</con:name>
+      <con:value>Bart</con:value>
+    </con:property>
+  </con:properties>
+  <con:reportParameters/>
+</con:testCase>

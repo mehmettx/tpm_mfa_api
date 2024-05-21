@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="searchUserByFirstName" path="api/v1/UserOperations/searchUserByFirstName" id="842a7e67-3920-4f66-9c4b-dc85144a74f9">
+  <con:settings id="51ce2495-3c6f-4c8c-9f0c-112097f80ef8">
+    <con:setting id="842a7e67-3920-4f66-9c4b-dc85144a74f9fileName">searchUserByFirstName</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="Method 2" id="9c90a8e0-dd39-44c1-baa5-1af1386756a2" method="GET">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>firstName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="Request 1" id="e3861b41-e503-4d08-9bea-93b1fb42b5dc" mediaType="application/json">
+      <con:settings/>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:parameterOrder>
+        <con:entry>oktaTenantName</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+        <con:entry>firstName</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

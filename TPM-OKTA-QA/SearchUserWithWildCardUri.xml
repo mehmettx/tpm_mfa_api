@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="SearchUserWithWildCardUri" path="api/v1/UserOperations/SearchUserWithWildCardUri" id="fbd76357-a126-424c-8e7e-8ac4fafe2f19">
+  <con:settings id="e711a1fd-402b-4ba0-bc26-284bbd48adc1">
+    <con:setting id="fbd76357-a126-424c-8e7e-8ac4fafe2f19fileName">SearchUserWithWildCardUri</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="Method 1" id="c212a377-2cc5-4949-ac27-59005ec922d8" method="GET">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>searchStr</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="SearchUserWithWildCardUri" id="71c3729a-6ea3-423b-975a-8cc33d8f66dd" mediaType="application/json">
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+      </con:settings>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters>
+        <con:entry key="searchStr" value=""/>
+      </con:parameters>
+      <con:parameterOrder>
+        <con:entry>oktaTenantName</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+        <con:entry>searchStr</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

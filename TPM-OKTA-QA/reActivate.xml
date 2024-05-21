@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="reActivate" path="api/v1/UserOperations/reActivate" id="8dac31d6-7e86-43fa-8c6e-b08a873f7952">
+  <con:settings id="40a418fe-796a-4539-b37a-5ca62a76c589">
+    <con:setting id="8dac31d6-7e86-43fa-8c6e-b08a873f7952fileName">reActivate</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="Method 1" id="8a63789d-b622-49ae-be11-3bece1830424" method="POST">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="reactivateUser" id="d2ccfe06-d017-4e14-ba12-0ae037e35a5d" mediaType="application/json" postQueryString="false">
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+      </con:settings>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters>
+        <con:entry key="oktaTenantName" value=""/>
+      </con:parameters>
+      <con:parameterOrder>
+        <con:entry>oktaTenantName</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

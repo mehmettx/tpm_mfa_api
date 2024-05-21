@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="createUserInGroup" path="/api/v1/UserOperations/createUserInGroup" id="163e0022-6d10-4722-85fa-a80be4cc4a3e">
+  <con:settings id="983ce61a-ef00-48bf-a002-c0c043d4c14b">
+    <con:setting id="163e0022-6d10-4722-85fa-a80be4cc4a3efileName">createUserInGroup</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="createUserInGroup" id="6d151f30-124b-4a3f-837b-36159628c42d" method="POST">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter>
+        <con:name>groupId</con:name>
+        <con:style>QUERY</con:style>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="createUserInGroup" id="795fca2e-5f1c-4801-82bb-b467560addfb" mediaType="application/json" postQueryString="false">
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+      </con:settings>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:parameterOrder>
+        <con:entry>oktaUrl</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

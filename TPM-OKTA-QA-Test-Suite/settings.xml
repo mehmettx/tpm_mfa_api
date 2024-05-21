@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite xmlns:con="http://eviware.com/soapui/config" id="98a2c32a-3f47-4550-b4f1-1926052c479e" name="TPM-OKTA-QA-Test Suite">
+  <con:settings id="b579bf1c-0302-4d28-83f4-75df64b4b535">
+    <con:setting id="98a2c32a-3f47-4550-b4f1-1926052c479efileName">TPM-OKTA-QA-Test-Suite</con:setting>
+  </con:settings>
+  <con:runType>SEQUENTIAL</con:runType>
+  <con:properties>
+    <con:property>
+      <con:name>API Key</con:name>
+      <con:value>gtFCJze0R7f2WmHrz5gztIoZPXlzJ92kadXHpZ+xObGmIEVPW7NCJtVN8k6IgXmnIoO1ejxRBky1CE7V3YIuFS8vZ3wxCh/xg7uSFWlQAGMujhODMjCPkZpmIu177DRyn4Y/nNIqdyogs8k+uxBVWOrbqS9Db8S/Iycv9XZSPEs=</con:value>
+    </con:property>
+    <con:property>
+      <con:name>oktaTenantName</con:name>
+      <con:value>preview</con:value>
+    </con:property>
+  </con:properties>
+  <con:reportParameters/>
+</con:testSuite>

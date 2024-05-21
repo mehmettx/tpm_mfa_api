@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="searchGroup" path="/api/v1/GroupOperations/searchGroup" id="1cb6f369-3b1d-4915-b8be-39b257cfb84e">
+  <con:settings id="2866923f-5b5d-4d93-bf7c-9b8f11854c3f">
+    <con:setting id="1cb6f369-3b1d-4915-b8be-39b257cfb84efileName">searchGroup</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:resource name="SearchUserWithWildCardUri" path="SearchUserWithWildCardUri" id="5ffaef59-4fb6-4cbe-b4a4-ece7adfe9ce7">
+    <con:settings/>
+    <con:parameters/>
+    <con:method name="Method" id="8a6e65f5-614f-421d-a742-ed5a7ca7c4c4" method="GET">
+      <con:settings/>
+      <con:parameters>
+        <con:parameter required="true">
+          <con:name>oktaTenantName</con:name>
+          <con:value/>
+          <con:style>QUERY</con:style>
+          <con:default/>
+        </con:parameter>
+        <con:parameter required="true">
+          <con:name>oktaApiKey</con:name>
+          <con:value/>
+          <con:style>QUERY</con:style>
+          <con:default/>
+        </con:parameter>
+        <con:parameter required="true">
+          <con:name>searchStr</con:name>
+          <con:value/>
+          <con:style>QUERY</con:style>
+          <con:default/>
+        </con:parameter>
+      </con:parameters>
+      <con:request name="SearchUserWithWildCardUri" id="42d17d6c-5e8c-49ac-9944-0b304253fa68" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+        <con:request/>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+        <con:parameterOrder>
+          <con:entry>oktaTenantName</con:entry>
+          <con:entry>oktaApiKey</con:entry>
+          <con:entry>searchStr</con:entry>
+        </con:parameterOrder>
+      </con:request>
+    </con:method>
+  </con:resource>
+  <con:method name="searchGroup" id="b523d94f-243f-4169-8316-990faff7ac27" method="GET">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>groupName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="searchGroup" id="18ec25b2-754a-4b85-9b31-a6502b4ea803" mediaType="application/json">
+      <con:settings>
+        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+      </con:settings>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters>
+        <con:entry key="groupName" value=""/>
+      </con:parameters>
+      <con:parameterOrder>
+        <con:entry>oktaTenantName</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+        <con:entry>groupName</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

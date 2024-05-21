@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="updateGroup" path="/api/v1/GroupOperations/updateGroup" id="6af8f16d-3a01-4cb4-b363-973b44ea2bc0">
+  <con:settings id="1aee91cc-8969-4c57-a72c-c5b3ff0efc37">
+    <con:setting id="6af8f16d-3a01-4cb4-b363-973b44ea2bc0fileName">updateGroup</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="updateGroup" id="cdd7f681-61d9-48c9-9b82-41c653063ac9" method="PUT">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name>oktaTenantName</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+      <con:parameter required="true">
+        <con:name>oktaApiKey</con:name>
+        <con:value/>
+        <con:style>QUERY</con:style>
+        <con:default/>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="updateGroup" id="1128a324-c762-41d4-9e69-d2fe6139359f" mediaType="application/json" postQueryString="false">
+      <con:settings/>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:parameterOrder>
+        <con:entry>oktaUrl</con:entry>
+        <con:entry>oktaApiKey</con:entry>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>

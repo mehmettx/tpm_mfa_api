@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config" name="deactivateUser" path="api/v1/UserOperations/deactivateUser" id="7886a74f-b298-4ae1-96a2-df88247f7970">
+  <con:settings id="47cc3b80-7f7f-4f28-aeb1-3c2c0996d414">
+    <con:setting id="7886a74f-b298-4ae1-96a2-df88247f7970fileName">deactivateUser</con:setting>
+  </con:settings>
+  <con:parameters/>
+  <con:method name="Method 1" id="29c74864-8899-4dd8-8ee8-1f25f5dc3402" method="POST">
+    <con:settings/>
+    <con:parameters>
+      <con:parameter required="true">
+        <con:name/>
+        <con:style>QUERY</con:style>
+      </con:parameter>
+    </con:parameters>
+    <con:request name="Request 1" id="b10260d1-b446-4eb4-89cd-35661a45d1f3" mediaType="application/json" postQueryString="false">
+      <con:settings/>
+      <con:endpoint>https://10.106.33.36:8089</con:endpoint>
+      <con:request/>
+      <con:credentials>
+        <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+        <con:authType>No Authorization</con:authType>
+      </con:credentials>
+      <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+      <con:parameters/>
+      <con:parameterOrder>
+        <con:entry/>
+      </con:parameterOrder>
+    </con:request>
+  </con:method>
+</con:resource>
